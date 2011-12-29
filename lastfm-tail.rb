@@ -24,6 +24,11 @@ OptionParser.new do |opts|
 		puts 'lastfm-tail 0.1b'
 		exit 0
 	end
+	
+	opts.on_tail('-h', '--help', 'Show this help dialog.') do
+		puts opts
+		exit 0
+	end
 end.parse!
 
 username = ARGV[-1] || 'xiongchiamiov'
