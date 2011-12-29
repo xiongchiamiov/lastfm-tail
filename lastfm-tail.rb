@@ -7,8 +7,19 @@ require 'open-uri'
 require 'optparse'
 require 'xmlsimple'
 
+trackLimit = 10
 OptionParser.new do |opts|
 	opts.banner = "Usage: #{$0} [options] [USER]"
+	
+	opts.on('-n', '--number NUM') do |num|
+		num = num.to_i
+		if num > 10
+			puts 'Last.fm only provides the 10 latest tracks; sorry!'
+			exit 1
+		end
+		
+		trackLimit = num
+	end
 	
 	opts.on('-v', '--version') do
 		puts 'lastfm-tail 0.1b'
@@ -20,7 +31,11 @@ username = ARGV[-1] || 'xiongchiamiov'
 rss = open("http://ws.audioscrobbler.com/2.0/user/#{username}/recenttracks.rss").read()
 xml = XmlSimple.xml_in rss
 items = xml['channel'][0]['item']
-items.each do |item|
+items.each_with_index do |item, i|
+	if i == trackLimit
+		break
+	end
+	
 	puts item['title']
 	#puts item['pubDate']
 end
