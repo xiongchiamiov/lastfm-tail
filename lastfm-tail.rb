@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 
-# This version does not, of course, respect any of the parameters outlined in
-# the README.
-
 require 'date'
 require 'open-uri'
 require 'optparse'
