@@ -11,7 +11,7 @@ trackLimit = 10
 OptionParser.new do |opts|
 	opts.banner = "Usage: #{$0} [options] [USER]"
 	
-	opts.on('-n', '--number NUM') do |num|
+	opts.on('-n', '--number NUM', 'List NUM tracks.') do |num|
 		num = num.to_i
 		if num > 10
 			puts 'Last.fm only provides the 10 latest tracks; sorry!'
@@ -21,7 +21,7 @@ OptionParser.new do |opts|
 		trackLimit = num
 	end
 	
-	opts.on('-v', '--version') do
+	opts.on('-v', '--version', 'Show the installed version of lastfm-tail.') do
 		puts 'lastfm-tail 0.1b'
 		exit 0
 	end
