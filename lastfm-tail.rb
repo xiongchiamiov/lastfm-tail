@@ -11,8 +11,7 @@ trackLimit = 10
 OptionParser.new do |opts|
 	opts.banner = "Usage: #{$0} [options] [USER]"
 	
-	opts.on('-n', '--number NUM', 'List NUM tracks.') do |num|
-		num = num.to_i
+	opts.on('-n', '--number NUM', Integer, 'List NUM tracks.') do |num|
 		if num > 10
 			puts 'Last.fm only provides the 10 latest tracks; sorry!'
 			exit 1
