@@ -7,7 +7,7 @@ recently-scrobbled tracks on [Last.fm](http://last.fm).
 
 or
 
-    curl -s https://raw.github.com/xiongchiamiov/lastfm-tail/latest/bin/lastfm-tail > ~/bin/lastfm-tail
+    curl -s https://raw.github.com/xiongchiamiov/lastfm-tail/master/bin/lastfm-tail > ~/bin/lastfm-tail
 	chmod +x ~/bin/lastfm-tail
 
 # Options
