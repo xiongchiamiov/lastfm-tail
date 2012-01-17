@@ -13,13 +13,13 @@ OptionParser.new do |opts|
 	
 	opts.on('-f', '--follow', "Don't exit after retrieving data, but poll "\
 	                         +"Last.fm for new tracks.  Polling frequency "\
-	                         +"is controlled by the `-F` option. Implies -r.") do
+	                         +"is controlled by the -F option. Implies -r.") do
 		pollFrequency = 5 # Magic number
 		reverse = true
 	end
 	
 	opts.on('-F', '--frequency NUM', Integer, 'Poll Last.fm every NUM seconds. '\
-	                                +'Defaults to 5.  Implies `-f`. ') do |num|
+	                                +'Defaults to 5.  Implies -f. ') do |num|
 		pollFrequency = num
 	end
 	
