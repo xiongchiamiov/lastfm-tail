@@ -9,7 +9,7 @@ trackLimit = 10
 pollFrequency = nil
 reverse = false
 OptionParser.new do |opts|
-	opts.banner = "Usage: #{$0} [options] [USER]"
+	opts.banner = "Usage: #{$0.split('/').last} [options] [USER]"
 	
 	opts.on('-f', '--follow', "Don't exit after retrieving data, but poll "\
 	                         +"Last.fm for new tracks.  Polling frequency "\
