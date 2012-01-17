@@ -5,6 +5,12 @@ require 'open-uri'
 require 'optparse'
 require 'xmlsimple'
 
+# Show prettier output on interrupt (ctrl+c)
+trap("INT") do |s|
+	puts
+	exit(s)
+end
+
 trackLimit = 10
 pollFrequency = nil
 reverse = false
