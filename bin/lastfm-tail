@@ -27,6 +27,7 @@ OptionParser.new do |opts|
 	opts.on('-F', '--frequency NUM', Integer, 'Poll Last.fm every NUM seconds. '\
 	                                +'Defaults to 5.  Implies -f. ') do |num|
 		pollFrequency = num
+		reverse = true
 	end
 	
 	opts.on('-n', '--number NUM', Integer, 'List NUM tracks.') do |num|
