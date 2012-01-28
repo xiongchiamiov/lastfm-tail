@@ -44,7 +44,7 @@ OptionParser.new do |opts|
 	end
 	
 	opts.on('-v', '--version', 'Show the installed version of lastfm-tail.') do
-		puts 'lastfm-tail 1.0.1'
+		puts 'lastfm-tail 1.0.2'
 		exit 0
 	end
 	
