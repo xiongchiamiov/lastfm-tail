@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.authors = ["xiongchiamiov"]
   s.email = ['xiong.chiamiov@gmail.com']
   
+  s.add_dependency 'englify'
   s.add_dependency 'xml-simple'
   
   s.files = %w( COPYING Rakefile README.md )

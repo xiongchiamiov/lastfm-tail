@@ -19,6 +19,7 @@ or
                                          option. Implies -r.
         -F, --frequency NUM              Poll Last.fm every NUM seconds. Defaults
                                          to 5.  Implies `-f`. 
+            --no-translate               Don't auto-translate foreign artist names.
         -n, --number NUM                 List NUM tracks.
         -r, --reverse                    List tracks from oldest to newest.
         -v, --version                    Show the installed version of lastfm-tail.

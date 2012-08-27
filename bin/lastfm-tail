@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
+# encoding: utf-8
 
 require 'date'
+require 'englify'
 require 'open-uri'
 require 'optparse'
 require 'xmlsimple'
@@ -14,6 +16,7 @@ end
 trackLimit = 10
 pollFrequency = nil
 reverse = false
+autoTranslate = true
 OptionParser.new do |opts|
 	opts.banner = "Usage: #{$0.split('/').last} [options] [USER]"
 	
@@ -28,6 +31,10 @@ OptionParser.new do |opts|
 	                                +'Defaults to 5.  Implies -f. ') do |num|
 		pollFrequency = num
 		reverse = true
+	end
+	
+	opts.on('--no-translate', "Don't auto-translate foreign artist names.") do
+		autoTranslate = false
 	end
 	
 	opts.on('-n', '--number NUM', Integer, 'List NUM tracks.') do |num|
@@ -74,7 +81,12 @@ begin
 			next
 		end
 		
-		puts item['title']
+		artist, title = item['title'][0].split(' – ')
+		if autoTranslate && !artist.ascii_only?
+			artist = englify(artist)
+		end
+		puts "#{artist} - #{title}"
+		
 		lastTimestamp = timestamp
 	end
 end while !pollFrequency.nil? && sleep(pollFrequency)
