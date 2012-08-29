@@ -7,6 +7,7 @@
 
 require 'date'
 require 'englify'
+require 'inifile'
 require 'open-uri'
 require 'optparse'
 require 'xmlsimple'
@@ -17,10 +18,14 @@ trap("INT") do |s|
 	exit(s)
 end
 
-trackLimit = 10
-pollFrequency = nil
-reverse = false
-autoTranslate = true
+config = IniFile.new("#{Dir.home}/.config/lastfm-tail/config.ini")
+config = config['global']
+trackLimit    = config['trackLimit'].nil?    ? 10    : config['trackLimit'].to_i
+pollFrequency = config['pollFrequency'].nil? ? nil   : config['pollFrequency'].to_i
+reverse       = config['reverse'].nil?       ? false : config['reverse'] != 'false'
+autoTranslate = config['autoTranslate'].nil? ? true  : config['autoTranslate'] != 'false'
+username      = config['username'].nil?      ? 'xiongchiamiov' : config['username']
+
 OptionParser.new do |opts|
 	opts.banner = "Usage: #{$0.split('/').last} [options] [USER]"
 	
@@ -65,7 +70,7 @@ OptionParser.new do |opts|
 	end
 end.parse!
 
-username = ARGV[-1] || 'xiongchiamiov'
+username = ARGV[-1] || username
 lastTimestamp = Time.at(0)
 
 # The logic here dealing with polling is a bit dirty.
