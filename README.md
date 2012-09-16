@@ -25,8 +25,8 @@ or
         -v, --version                    Show the installed version of lastfm-tail.
         -h, --help                       Show this help dialog.
 
-    If you change options from the defaults frequently, you can specify
-    alternate default values in a configuration file.  Copy `config.ini.example`
-    to `$HOME/.config/lastfm-tail/config.ini` and uncomment the lines you wish
-    to change.
+If you change options from the defaults frequently, you can specify alternate
+default values in a configuration file.  Copy `config.ini.example` to
+`$HOME/.config/lastfm-tail/config.ini` and uncomment the lines you wish to
+change.
 
