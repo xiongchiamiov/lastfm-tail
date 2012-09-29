@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email = ['xiong.chiamiov@gmail.com']
   
   s.add_dependency 'englify'
-  s.add_dependency 'inifile'
+  s.add_dependency 'inifile', '~> 1.1.0'
   s.add_dependency 'xml-simple'
   
   s.files = %w( COPYING Rakefile README.md )
