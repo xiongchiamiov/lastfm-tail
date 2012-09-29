@@ -75,7 +75,19 @@ lastTimestamp = Time.at(0)
 
 # The logic here dealing with polling is a bit dirty.
 begin
-	rss = open("http://ws.audioscrobbler.com/2.0/user/#{username}/recenttracks.rss").read()
+	begin
+		rss = open("http://ws.audioscrobbler.com/2.0/user/#{username}/recenttracks.rss").read()
+	rescue SocketError
+		$stderr.write "Network unreachable, trying again in "
+		5.downto 1 do |i|
+			$stderr.print "#{i} "
+			sleep 1
+		end
+		$stderr.write "\n"
+		networkError = true
+		next
+	end
+	networkError = false
 	xml = XmlSimple.xml_in rss
 	items = xml['channel'][0]['item']
 	items.reverse! if reverse
@@ -98,5 +110,5 @@ begin
 		
 		lastTimestamp = timestamp
 	end
-end while !pollFrequency.nil? && sleep(pollFrequency)
+end while networkError || (!pollFrequency.nil? && sleep(pollFrequency))
 
