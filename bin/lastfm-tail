@@ -18,6 +18,8 @@ trap("INT") do |s|
 	exit(s)
 end
 
+translationCache = {}
+
 config = IniFile.new("#{Dir.home}/.config/lastfm-tail/config.ini")
 config = config['global']
 trackLimit    = config['trackLimit'].nil?    ? 10    : config['trackLimit'].to_i
@@ -104,7 +106,10 @@ begin
 		
 		artist, title = item['title'][0].split(' – ')
 		if autoTranslate && !artist.ascii_only?
-			artist = englify(artist)
+			if translationCache[artist].nil?
+				translationCache[artist] = englify(artist)
+			end
+			artist = translationCache[artist]
 		end
 		puts "#{artist} - #{title}"
 		
