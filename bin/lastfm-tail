@@ -8,15 +8,10 @@
 require 'date'
 require 'englify'
 require 'inifile'
+require 'nice-sigint'
 require 'open-uri'
 require 'optparse'
 require 'xmlsimple'
-
-# Show prettier output on interrupt (ctrl+c)
-trap("INT") do |s|
-	puts
-	exit(s)
-end
 
 translationCache = {}
 

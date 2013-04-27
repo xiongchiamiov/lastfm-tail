@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
   
   s.add_dependency 'englify'
   s.add_dependency 'inifile', '~> 1.1.0'
+  s.add_dependency 'nice-sigint'
   s.add_dependency 'xml-simple'
   
   s.files = %w( COPYING Rakefile README.md )
