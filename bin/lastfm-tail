@@ -74,7 +74,7 @@ lastTimestamp = Time.at(0)
 begin
 	begin
 		rss = open("http://ws.audioscrobbler.com/2.0/user/#{username}/recenttracks.rss").read()
-	rescue SocketError
+	rescue SocketError, OpenURI::HTTPError, EOFError, Net::HTTPServiceUnavailable
 		$stderr.write "Network unreachable, trying again in "
 		5.downto 1 do |i|
 			$stderr.print "#{i} "
