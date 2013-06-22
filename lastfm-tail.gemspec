@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'lastfm-tail'
-  s.version = "1.0.2"
+  s.version = "1.1.0"
   s.date = Time.now.strftime('%Y-%m-%d')
 
   s.authors = ["xiongchiamiov"]
