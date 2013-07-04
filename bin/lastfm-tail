@@ -83,7 +83,8 @@ end
 begin
 	begin
 		rss = open("http://ws.audioscrobbler.com/2.0/user/#{username}/recenttracks.rss").read()
-	rescue SocketError, OpenURI::HTTPError, EOFError, Net::HTTPServiceUnavailable
+	rescue SocketError, OpenURI::HTTPError, EOFError, Errno::ENETDOWN,
+	       Net::HTTPServiceUnavailable
 		print_retry 'Network unreachable.'
 		networkError = true
 		next
