@@ -70,23 +70,34 @@ end.parse!
 username = ARGV[-1] || username
 lastTimestamp = Time.at(0)
 
+def print_retry(message)
+	$stderr.write "#{message}  Trying again in "
+	5.downto 1 do |i|
+		$stderr.print "#{i} "
+		sleep 1
+	end
+	$stderr.write "\n"
+end
+
 # The logic here dealing with polling is a bit dirty.
 begin
 	begin
 		rss = open("http://ws.audioscrobbler.com/2.0/user/#{username}/recenttracks.rss").read()
 	rescue SocketError, OpenURI::HTTPError, EOFError, Net::HTTPServiceUnavailable
-		$stderr.write "Network unreachable, trying again in "
-		5.downto 1 do |i|
-			$stderr.print "#{i} "
-			sleep 1
-		end
-		$stderr.write "\n"
+		print_retry 'Network unreachable.'
 		networkError = true
 		next
 	end
 	networkError = false
+	
 	xml = XmlSimple.xml_in rss
 	items = xml['channel'][0]['item']
+	if items.nil?
+		print_retry 'Empty response from server.'
+		networkError = true
+		next
+	end
+	
 	items.reverse! if reverse
 	items.each_with_index do |item, i|
 		if i == trackLimit
