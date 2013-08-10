@@ -17,10 +17,10 @@ translationCache = {}
 
 config = IniFile.new("#{Dir.home}/.config/lastfm-tail/config.ini")
 config = config['global']
-trackLimit    = config['trackLimit'].nil?    ? 10    : config['trackLimit'].to_i
-pollFrequency = config['pollFrequency'].nil? ? nil   : config['pollFrequency'].to_i
-reverse       = config['reverse'].nil?       ? false : config['reverse'] != 'false'
-autoTranslate = config['autoTranslate'].nil? ? true  : config['autoTranslate'] != 'false'
+trackLimit    = config['trackLimit'].nil?    ? 10              : config['trackLimit'].to_i
+pollFrequency = config['pollFrequency'].nil? ? nil             : config['pollFrequency'].to_i
+reverse       = config['reverse'].nil?       ? !!pollFrequency : config['reverse'] != 'false'
+autoTranslate = config['autoTranslate'].nil? ? true            : config['autoTranslate'] != 'false'
 username      = config['username'].nil?      ? 'xiongchiamiov' : config['username']
 
 OptionParser.new do |opts|
